@@ -1,0 +1,20 @@
+---
+import ProductPage from '../../layouts/ProductPage.astro';
+import heroImage from '../../assets/hero-desktop.png';
+---
+
+<ProductPage
+  name="fudge brownie"
+  title="A fudge brownie, made with care."
+  description="Soft and fudgy, made with dates, seeds, nuts, butter, pure cocoa and whey protein. No refined sugar."
+  image={heroImage}
+  imageAlt="Two hands breaking a dark fudge brownie in half, showing its soft centre, nuts and seeds."
+  details={[
+    'Made with dates, seeds, nuts, butter, pure cocoa and whey protein.',
+    'No refined sugar. The sweetness comes from dates.',
+    'Deep cocoa flavour, a soft centre and a little crunch in every bite.',
+  ]}
+  allergens="Contains tree nuts (walnut, cashew, almond) and milk (butter, whey)."
+  productUrl="/products/fudge-brownie/"
+  shareImage="/og-share.jpg"
+/>

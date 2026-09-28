@@ -1,0 +1,21 @@
+---
+import ProductPage from '../../layouts/ProductPage.astro';
+import heroImage from '../../assets/peanut-butter-brownie-hero.png';
+---
+
+<ProductPage
+  name="peanut butter fudge"
+  title="Peanut butter fudge, made with care."
+  eyebrow="New fudge"
+  description="A dark cocoa fudge with creamy peanut butter on top. Rich, soft and made for people who like their chocolate with a little more depth."
+  image={heroImage}
+  imageAlt="Hands holding apart dark cocoa fudge with creamy peanut butter topping and roasted peanuts."
+  details={[
+    'Dark cocoa fudge with creamy peanut butter topping.',
+    'A rich, soft bite with roasted peanut pieces on top for texture.',
+    'Available to order through WhatsApp.',
+  ]}
+  allergens="Contains peanuts. Please confirm the full ingredient and allergen information with us when you order."
+  productUrl="/products/peanut-butter-brownie/"
+  shareImage="/og-peanut-butter-fudge.png"
+/>
