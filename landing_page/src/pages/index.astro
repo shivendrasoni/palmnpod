@@ -1,0 +1,965 @@
+---
+import '@fontsource-variable/fraunces/full.css';
+import '@fontsource-variable/manrope';
+import '../styles/global.css';
+import { Picture, Image, getImage } from 'astro:assets';
+
+import heroDesktop from '../assets/hero-desktop.png';
+import heroMobile from '../assets/hero-mobile.png';
+import textureMacro from '../assets/texture-macro.png';
+import brownieWhole from '../assets/brownie-whole.png';
+import brownieOpen from '../assets/brownie-open.png';
+import imgDates from '../assets/ingredient-dates.png';
+import imgNuts from '../assets/ingredient-nuts.png';
+import logoRect from '../assets/logo-rectangle-cocoa.png';
+import logoSeal from '../assets/logo-circular-oat.png';
+import imgSeeds from '../assets/ingredient-seeds.png';
+import imgButter from '../assets/ingredient-butter.png';
+import imgCocoa from '../assets/ingredient-cocoa.png';
+import imgWhey from '../assets/ingredient-whey.png';
+import sharingHands from '../assets/sharing-hands.png';
+import closingStill from '../assets/closing-still.png';
+
+const WHATSAPP_NUMBER = '919730471041';
+const WHATSAPP_DISPLAY = '+91 97304 71041';
+const WHATSAPP_TEXT = 'Hi, I want to place an order';
+const orderUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_TEXT)}`;
+
+const title = 'Palm and Pod: chocolate joy, made with care';
+const description =
+  'A soft, fudgy brownie made with dates, seeds, nuts, butter, pure cocoa and whey protein. No refined sugar. Order on WhatsApp.';
+const ogImage = Astro.site ? new URL('/og-share.jpg', Astro.site).href : '/og-share.jpg';
+
+// Hero is art-directed: a landscape frame for wide screens, a portrait one for phones.
+const heroWide = await getImage({ src: heroDesktop, widths: [1280, 1920, 2880], format: 'webp', quality: 78 });
+const heroTall = await getImage({ src: heroMobile, widths: [640, 960, 1280], format: 'webp', quality: 78 });
+const heroWideAvif = await getImage({ src: heroDesktop, widths: [1280, 1920, 2880], format: 'avif', quality: 60 });
+const heroTallAvif = await getImage({ src: heroMobile, widths: [640, 960, 1280], format: 'avif', quality: 60 });
+
+const ingredients = [
+  { img: imgDates, name: 'Dates', role: 'For sweetness. Soft and sticky, and the reason there is no refined sugar.', alt: 'Soft, glossy dates in a small ceramic dish, one torn open.' },
+  { img: imgNuts, name: 'Nuts', role: 'Walnuts, cashews and almonds, chopped through the crumb.', alt: 'Walnut halves, whole cashews and almonds, one almond cut open, on oat paper.' },
+  { img: imgSeeds, name: 'Seeds', role: 'Flax, sunflower, chia and pumpkin, for a little crunch.', alt: 'A small scatter of flax, sunflower, chia and pumpkin seeds on oat paper.' },
+  { img: imgButter, name: 'Butter', role: 'For richness, and that soft, fudgy centre.', alt: 'A block of butter on parchment with one soft curl cut away.' },
+  { img: imgCocoa, name: 'Pure cocoa', role: 'For deep chocolate flavour.', alt: 'Pure cocoa powder in a ceramic bowl, a little dusted onto paper.' },
+  { img: imgWhey, name: 'Whey protein', role: 'Part of the recipe, so every piece contains protein.', alt: 'Plain whey protein powder in a ceramic bowl beside a wooden spoon.' },
+];
+
+const fullList = [
+  'dates', 'flax seeds', 'sunflower seeds', 'chia seeds', 'pumpkin seeds',
+  'walnuts', 'cashews', 'almonds', 'butter', 'pure cocoa', 'whey protein',
+];
+---
+
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#3a241e" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Palm and Pod" />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" as="image" type="image/avif" imagesrcset={heroTallAvif.srcSet.attribute} media="(max-width: 47.99rem)" />
+    <link rel="preload" as="image" type="image/avif" imagesrcset={heroWideAvif.srcSet.attribute} media="(min-width: 48rem)" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <a class="wordmark" href="#top" aria-label="Palm and Pod, back to top">
+        <Image src={logoRect} widths={[240, 480, 720]} sizes="(max-width: 47.99rem) 150px, 196px" format="webp" alt="Palm and Pod" loading="eager" />
+      </a>
+      <nav aria-label="Page">
+        <a class="masthead__link" href="#ingredients">Ingredients</a>
+        <a class="button button--small" href={orderUrl} target="_blank" rel="noopener">
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
+          <span>Order<span class="hide-narrow"> on WhatsApp</span></span>
+        </a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- 1. Hero poster -->
+      <section class="poster hero" id="top" aria-labelledby="hero-title">
+        <picture class="poster__media">
+          <source media="(max-width: 47.99rem)" type="image/avif" srcset={heroTallAvif.srcSet.attribute} sizes="100vw" />
+          <source media="(max-width: 47.99rem)" type="image/webp" srcset={heroTall.srcSet.attribute} sizes="100vw" />
+          <source type="image/avif" srcset={heroWideAvif.srcSet.attribute} sizes="100vw" />
+          <img
+            src={heroWide.src}
+            srcset={heroWide.srcSet.attribute}
+            sizes="100vw"
+            width="2880"
+            height="1800"
+            alt="Two hands breaking a dark fudge brownie in half, showing its soft centre, nuts and seeds."
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+        <div class="hero__copy">
+          <h1 id="hero-title" class="rise">Chocolate joy, made with care.</h1>
+          <p class="hero__lead rise">
+            The Palm and Pod fudge brownie. Soft and fudgy, made with dates, seeds, nuts, butter, pure cocoa and whey protein. No refined sugar.
+          </p>
+          <div class="hero__actions rise">
+            <a class="button" href={orderUrl} target="_blank" rel="noopener">
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
+              Order on WhatsApp
+            </a>
+            <a class="textlink" href="#ingredients">See the ingredients</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Texture poster -->
+      <section class="poster poster--dark texture" aria-labelledby="texture-title">
+        <Picture
+          class="poster__media"
+          src={textureMacro}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[960, 1600, 2400]}
+          sizes="100vw"
+          quality={72}
+          alt="Extreme close-up of the brownie's cut face: dense crumb, nut pieces, seeds and a crackled top."
+          loading="lazy"
+        />
+        <div class="texture__copy">
+          <h2 id="texture-title" class="rise">Deep cocoa. Soft centre. A little crunch.</h2>
+          <p class="rise">A brownie that feels like a brownie. Dense and fudgy, with nuts and seeds in every bite.</p>
+        </div>
+      </section>
+
+      <!-- 3. Open it up: pinned scroll scene -->
+      <section class="open" aria-labelledby="open-title" data-open>
+        <div class="open__stage">
+          <div class="open__copy">
+            <h2 id="open-title">Everything in it has a place.</h2>
+            <p>Eleven ingredients. Each one there for a reason.</p>
+          </div>
+          <div class="open__frame">
+            <Picture
+              class="open__img open__img--whole"
+              src={brownieWhole}
+              formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+              widths={[768, 1200, 1536]}
+              sizes="(min-width: 64rem) 72vw, 100vw"
+              quality={74}
+              alt=""
+              loading="lazy"
+            />
+            <Picture
+              class="open__img open__img--open"
+              src={brownieOpen}
+              formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+              widths={[768, 1200, 1536]}
+              sizes="(min-width: 64rem) 72vw, 100vw"
+              quality={78}
+              alt="The fudge brownie with its eleven ingredients laid out around it: almonds, walnuts, cashews, dates, flax seeds, pure cocoa, butter, sunflower seeds, chia seeds, whey protein and pumpkin seeds."
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. What goes in: calm information -->
+      <section class="ingredients" id="ingredients" aria-labelledby="ingredients-title">
+        <div class="ingredients__head">
+          <h2 id="ingredients-title">What goes in matters.</h2>
+          <p class="ingredients__intro">
+            Dates for sweetness, pure cocoa for deep chocolate flavour, butter for richness, seeds and nuts for texture, and whey protein as part of the recipe.
+          </p>
+        </div>
+
+        <ul class="ingredient-row" role="list">
+          {ingredients.map((item) => (
+            <li class="ingredient">
+              <Picture
+                class="ingredient__img"
+                src={item.img}
+                formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+                widths={[360, 540, 800]}
+                sizes="(min-width: 64rem) 16vw, (min-width: 40rem) 30vw, 46vw"
+                quality={74}
+                alt={item.alt}
+                loading="lazy"
+              />
+              <h3>{item.name}</h3>
+              <p>{item.role}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div class="facts">
+          <div class="facts__block">
+            <h3>Full ingredient list</h3>
+            <p class="facts__list">{fullList.join(', ')}.</p>
+          </div>
+          <div class="facts__block facts__block--allergen" role="note" aria-labelledby="allergen-title">
+            <h3 id="allergen-title">
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="icon icon--line"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5M12 16.4v.1" /></svg>
+              Allergens
+            </h3>
+            <p><strong>Contains tree nuts</strong> (walnut, cashew, almond) <strong>and milk</strong> (butter, whey).</p>
+          </div>
+          <div class="facts__block">
+            <h3>Good to know</h3>
+            <ul class="facts__points" role="list">
+              <li>No refined sugar. The sweetness comes from dates.</li>
+              <li>Contains protein from its recipe.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Sharing poster -->
+      <section class="share" aria-labelledby="share-title">
+        <Picture
+          class="share__img"
+          src={sharingHands}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[800, 1400, 2400]}
+          sizes="(min-width: 64rem) 58vw, 100vw"
+          quality={74}
+          alt="One person passing a piece of brownie to another across a linen-covered table."
+          loading="lazy"
+        />
+        <div class="share__copy">
+          <h2 id="share-title" class="rise">For the people you care about. Including you.</h2>
+          <p class="rise">An afternoon break, something after dinner, a piece for the table. Chocolate that is easy to offer and easy to want.</p>
+        </div>
+      </section>
+
+      <!-- 6. Close -->
+      <section class="poster poster--dark close" aria-labelledby="close-title">
+        <Picture
+          class="poster__media"
+          src={closingStill}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[960, 1920, 2880]}
+          sizes="100vw"
+          quality={72}
+          alt="A stack of brownies on parchment beside a ceramic cup, in low evening light."
+          loading="lazy"
+        />
+        <div class="close__copy">
+          <h2 id="close-title" class="rise">Keep the joy.</h2>
+          <p class="rise">We are taking orders on WhatsApp. Send us a message and we will take it from there.</p>
+          <div class="close__actions rise">
+            <a class="button button--light" href={orderUrl} target="_blank" rel="noopener">
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
+              Order on WhatsApp
+            </a>
+            <p class="close__number">or message <a href={orderUrl} target="_blank" rel="noopener">{WHATSAPP_DISPLAY}</a></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <Image class="footer__seal" src={logoSeal} widths={[120, 240]} sizes="96px" format="webp" alt="Palm and Pod" loading="lazy" />
+      <p>Contains tree nuts (walnut, cashew, almond) and milk.</p>
+      <p>Product images are for illustration.</p>
+      <p>&copy; {new Date().getFullYear()} Palm and Pod</p>
+    </footer>
+
+    <script>
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      // Entrance: posters settle in once as they arrive. Content stays visible without JS.
+      document.documentElement.classList.add('js');
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in');
+              io.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.25 }
+      );
+      document.querySelectorAll('.poster, .share').forEach((el) => io.observe(el));
+
+      // Signature: the whole brownie pulls back and opens into its ingredients as you scroll.
+      const scene = document.querySelector<HTMLElement>('[data-open]');
+      if (scene && !reduce.matches) {
+        scene.classList.add('is-live');
+        let ticking = false;
+        const clamp = (v: number) => Math.min(1, Math.max(0, v));
+        const update = () => {
+          ticking = false;
+          const rect = scene.getBoundingClientRect();
+          const travel = rect.height - window.innerHeight;
+          const raw = travel > 0 ? clamp(-rect.top / travel) : 1;
+          // Hold briefly at each end so both states can be read.
+          const p = clamp((raw - 0.12) / 0.66);
+          const eased = 1 - Math.pow(1 - p, 3);
+          scene.style.setProperty('--p', eased.toFixed(4));
+        };
+        const onScroll = () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+          }
+        };
+        update();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+      }
+    </script>
+
+    <style>
+      /* ---------- shared ---------- */
+      .skip {
+        position: absolute;
+        left: 1rem;
+        top: -4rem;
+        z-index: 50;
+        padding: 0.75rem 1rem;
+        background: var(--cocoa);
+        color: var(--oat);
+        border-radius: 12px;
+        font-weight: 600;
+      }
+      .skip:focus {
+        top: 1rem;
+      }
+
+      .icon {
+        width: 1.25em;
+        height: 1.25em;
+        flex: none;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        min-height: 3.5rem;
+        padding: 0 1.6rem;
+        border-radius: 14px;
+        background: var(--cocoa);
+        color: var(--oat);
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 1.0625rem;
+        letter-spacing: 0.005em;
+        text-decoration: none;
+        box-shadow: 0 1px 0 rgb(255 255 255 / 0.08) inset, 0 10px 24px -14px rgb(42 25 20 / 0.7);
+        transition: background-color 220ms var(--ease-out), transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+      }
+      .button:hover {
+        background: var(--cocoa-deep);
+        transform: translateY(-1px);
+        box-shadow: 0 1px 0 rgb(255 255 255 / 0.08) inset, 0 14px 28px -14px rgb(42 25 20 / 0.8);
+      }
+      .button:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 10px -8px rgb(42 25 20 / 0.8);
+      }
+      .button--small {
+        min-height: 2.75rem;
+        padding: 0 1rem;
+        border-radius: 12px;
+        font-size: 0.9375rem;
+      }
+      .button--light {
+        background: var(--oat);
+        color: var(--cocoa);
+      }
+      .button--light:hover {
+        background: #fff8ee;
+      }
+
+      .textlink {
+        font-weight: 600;
+        text-decoration: underline;
+        text-decoration-color: rgb(58 36 30 / 0.35);
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 0.3em;
+        transition: text-decoration-color 200ms var(--ease-out);
+      }
+      .textlink:hover {
+        text-decoration-color: var(--gold);
+      }
+
+      /* ---------- masthead ---------- */
+      .masthead {
+        position: relative;
+        z-index: 10;
+        background: var(--oat-photo);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: calc(env(safe-area-inset-top, 0px) + 1.25rem) var(--margin) 1rem;
+      }
+      .wordmark {
+        display: block;
+        flex: none;
+      }
+      .wordmark :global(img) {
+        width: clamp(9.375rem, 14vw, 12.25rem);
+        height: auto;
+      }
+      .masthead nav {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .masthead__link {
+        font-weight: 600;
+        font-size: 0.9375rem;
+        text-decoration: none;
+      }
+      .masthead__link:hover {
+        text-decoration: underline;
+        text-decoration-color: var(--gold);
+      }
+
+      /* ---------- poster base ---------- */
+      .poster {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        min-height: 100svh;
+        display: grid;
+      }
+      .poster__media,
+      .poster :global(img.poster__media) {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      .poster :global(img.poster__media),
+      .poster > .poster__media > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform-origin: 60% 50%;
+      }
+      :global(.js) .poster :global(img.poster__media),
+      :global(.js) .poster > .poster__media > img {
+        transform: scale(1.06);
+        transition: transform 1800ms var(--ease-out);
+      }
+      :global(.js) .poster.is-in :global(img.poster__media),
+      :global(.js) .poster.is-in > .poster__media > img {
+        transform: scale(1);
+      }
+      :global(.js) .rise {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 360ms var(--ease-out), transform 360ms var(--ease-out);
+      }
+      :global(.js) .is-in .rise {
+        opacity: 1;
+        transform: none;
+      }
+      :global(.js) .is-in .rise:nth-child(2) { transition-delay: 90ms; }
+      :global(.js) .is-in .rise:nth-child(3) { transition-delay: 180ms; }
+
+      .poster--dark {
+        color: var(--oat);
+      }
+
+      /* ---------- 1. hero ---------- */
+      .hero {
+        background: var(--oat-photo);
+        min-height: calc(100svh - 4.5rem);
+      }
+      .hero .poster__media img {
+        object-position: 70% 50%;
+      }
+      .hero__copy {
+        align-self: center;
+        width: min(100%, 38rem);
+        margin-left: var(--margin);
+        padding-block: 4rem;
+      }
+      .hero h1 {
+        font-size: clamp(2.875rem, 6.2vw, 6rem);
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+        max-width: 11ch;
+      }
+      .hero__lead {
+        margin-top: 1.75rem;
+        max-width: 30rem;
+        font-size: clamp(1.1875rem, 1.5vw, 1.3125rem);
+        line-height: 1.5;
+      }
+      .hero__actions {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem 1.75rem;
+      }
+
+      /* ---------- 2. texture ---------- */
+      .texture::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(to top, rgb(42 25 20 / 0.9) 0%, rgb(42 25 20 / 0.55) 38%, rgb(42 25 20 / 0) 70%);
+      }
+      .texture__copy {
+        align-self: end;
+        padding: 0 var(--margin) clamp(3rem, 9vh, 6rem);
+        max-width: 60rem;
+      }
+      .texture h2 {
+        font-size: clamp(2.5rem, 5.4vw, 5rem);
+        line-height: 1.02;
+        letter-spacing: -0.025em;
+      }
+      .texture p {
+        margin-top: 1.25rem;
+        max-width: 32rem;
+        font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+        color: rgb(243 231 212 / 0.9);
+      }
+
+      /* ---------- 3. open it up ---------- */
+      .open {
+        --p: 1;
+        position: relative;
+        background: var(--oat-photo);
+      }
+      .open.is-live {
+        --p: 0;
+        height: 260svh;
+      }
+      .open__stage {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        align-content: center;
+        gap: clamp(1rem, 3vh, 2rem);
+        min-height: 100svh;
+        padding: clamp(3rem, 8vh, 5rem) var(--margin) clamp(1.5rem, 4vh, 3rem);
+      }
+      .open.is-live .open__stage {
+        position: sticky;
+        top: 0;
+        height: 100svh;
+        overflow: hidden;
+      }
+      .open__copy {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.5rem 2rem;
+        max-width: var(--max);
+        width: 100%;
+        margin-inline: auto;
+      }
+      /* The heading sits on its own paper so the enlarged layout passes under it. */
+      .open__copy::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        inset: -40vh calc(var(--margin) * -1 - 50vw) -2.5rem;
+        background: linear-gradient(to bottom, var(--oat-photo) calc(100% - 2.5rem), rgb(243 228 207 / 0));
+      }
+      .open h2 {
+        font-size: clamp(2.25rem, 4.4vw, 4rem);
+        line-height: 1.04;
+        letter-spacing: -0.022em;
+      }
+      .open__copy p {
+        font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+        color: var(--toffee-ink);
+        font-weight: 500;
+      }
+      .open__frame {
+        position: relative;
+        width: min(100%, calc((100svh - 13rem) * 1.5), 72rem);
+        aspect-ratio: 3 / 2;
+        margin-inline: auto;
+        align-self: center;
+        /* No mask: the photos' paper is exactly the page ground, so while the
+           ingredient layout is enlarged it bleeds to the screen edge, where the
+           stage clips it, and never shows a rectangle. */
+        z-index: 0;
+      }
+      .open__frame :global(.open__img) {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .open__frame :global(.open__img) {
+        object-fit: contain;
+        transform-origin: 50% 49%;
+        will-change: transform, opacity;
+      }
+      /* The whole brownie travels to where the brownie sits in the ingredient
+         layout (centre 49% / 74.5%, 0.53x), so one brownie settles into the other. */
+      .open__frame :global(.open__img--whole) {
+        transform-origin: 50% 51%;
+        opacity: clamp(0, calc(2.4 - var(--p) * 2.6), 1);
+        transform: translate(calc(var(--p) * -1%), calc(var(--p) * 23.5%)) scale(calc(1 - var(--p) * 0.47));
+      }
+      .open__frame :global(.open__img--open) {
+        transform-origin: 49% 74.5%;
+        opacity: clamp(0, calc(var(--p) * 2.4 - 0.7), 1);
+        transform: translate(calc((1 - var(--p)) * 1%), calc((1 - var(--p)) * -23.5%)) scale(calc(1.88 - var(--p) * 0.88));
+      }
+      .open:not(.is-live) .open__frame :global(.open__img--whole) {
+        display: none;
+      }
+
+      /* ---------- 4. ingredients ---------- */
+      .ingredients {
+        max-width: var(--max);
+        margin-inline: auto;
+        padding: clamp(5rem, 12vh, 9rem) var(--margin) clamp(4rem, 10vh, 8rem);
+      }
+      .ingredients__head {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        column-gap: 1.5rem;
+        row-gap: 1.25rem;
+        align-items: end;
+      }
+      .ingredients h2 {
+        grid-column: 1 / span 6;
+        font-size: clamp(2.125rem, 3.6vw, 3.5rem);
+        line-height: 1.06;
+        letter-spacing: -0.018em;
+      }
+      .ingredients__intro {
+        grid-column: 8 / span 5;
+        max-width: 34rem;
+        font-size: 1.125rem;
+      }
+      .ingredient-row {
+        list-style: none;
+        margin: clamp(3rem, 7vh, 4.5rem) 0 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 3rem clamp(1.25rem, 2.5vw, 2.5rem);
+        align-items: start;
+      }
+      /* Two leads (sweetness, texture), then a quieter supporting set. */
+      .ingredient {
+        grid-column: span 3;
+      }
+      .ingredient:nth-child(-n + 2) {
+        grid-column: span 6;
+      }
+      .ingredient:nth-child(-n + 2) h3 {
+        font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+        margin-top: 1.5rem;
+      }
+      .ingredient:nth-child(-n + 2) p {
+        font-size: 1.125rem;
+        max-width: 34ch;
+      }
+      .ingredient :global(.ingredient__img) {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+      }
+      .ingredient:nth-child(-n + 2) :global(.ingredient__img) {
+        aspect-ratio: 3 / 2;
+      }
+      .ingredient :global(.ingredient__img) {
+        object-fit: cover;
+        border-radius: 18px;
+      }
+      .ingredient h3 {
+        margin-top: 1.25rem;
+        font-size: 1.5rem;
+        line-height: 1.15;
+      }
+      .ingredient p {
+        margin-top: 0.4rem;
+        font-size: 0.9688rem;
+        line-height: 1.55;
+        max-width: 22ch;
+      }
+
+      .facts {
+        margin-top: clamp(4rem, 9vh, 6rem);
+        padding-top: 2.5rem;
+        border-top: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: 1.3fr 1fr 1fr;
+        gap: 2rem 3rem;
+      }
+      .facts h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.8125rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .facts__list {
+        margin-top: 0.75rem;
+        font-size: 1.125rem;
+        max-width: 36rem;
+      }
+            .facts__block--allergen {
+        padding: 1.5rem;
+        margin: -1.5rem 0;
+        border-radius: 18px;
+        background: var(--leaf-wash);
+      }
+      .facts__block--allergen p {
+        margin-top: 0.75rem;
+        font-size: 1.125rem;
+      }
+      .icon--line {
+        stroke-width: 2;
+      }
+      .facts__points {
+        list-style: none;
+        margin: 0.75rem 0 0;
+        padding: 0;
+        display: grid;
+        gap: 0.5rem;
+        font-size: 1.0625rem;
+      }
+
+      /* ---------- 5. share ---------- */
+      .share {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        align-items: center;
+        background: var(--toffee-wash);
+        min-height: 90svh;
+      }
+      .share > :global(picture) {
+        grid-column: 1 / span 7;
+        align-self: stretch;
+        overflow: hidden;
+      }
+      .share :global(.share__img) {
+        width: 100%;
+        height: 100%;
+        min-height: 36rem;
+        object-fit: cover;
+        object-position: 50% 40%;
+      }
+      .share__copy {
+        grid-column: 8 / span 5;
+        padding: 4rem var(--margin) 4rem clamp(2rem, 4vw, 4rem);
+      }
+      .share h2 {
+        font-size: clamp(2.25rem, 3.8vw, 3.75rem);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        max-width: 12ch;
+      }
+      .share p {
+        margin-top: 1.5rem;
+        max-width: 28rem;
+        font-size: 1.125rem;
+      }
+
+      /* ---------- 6. close ---------- */
+      .close {
+        min-height: min(100svh, 56rem);
+        background: var(--cocoa-deep);
+      }
+      .close :global(img.poster__media) {
+        object-position: 75% 50%;
+      }
+      .close__copy {
+        align-self: center;
+        margin-left: var(--margin);
+        width: min(100% - var(--margin) * 2, 34rem);
+        padding-block: 6rem;
+      }
+      .close h2 {
+        font-size: clamp(3rem, 7vw, 6rem);
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+      }
+      .close p {
+        margin-top: 1.5rem;
+        font-size: clamp(1.125rem, 1.4vw, 1.25rem);
+        color: rgb(243 231 212 / 0.9);
+        max-width: 28rem;
+      }
+      .close__actions {
+        margin-top: 2.5rem;
+      }
+      .close__actions .close__number {
+        margin-top: 1rem;
+        font-size: 0.9375rem;
+        color: rgb(243 231 212 / 0.78);
+      }
+      .close__number a {
+        color: var(--oat);
+        font-variant-numeric: tabular-nums;
+        text-decoration-color: rgb(215 177 102 / 0.8);
+      }
+      .close :global(:focus-visible) {
+        box-shadow: 0 0 0 6px var(--cocoa-deep);
+      }
+
+      /* ---------- footer ---------- */
+      .footer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem 2.5rem;
+        padding: 2.5rem var(--margin) calc(env(safe-area-inset-bottom, 0px) + 2.5rem);
+        background: var(--cocoa-deep);
+        color: rgb(243 231 212 / 0.78);
+        font-size: 0.875rem;
+        border-top: 1px solid rgb(243 231 212 / 0.12);
+      }
+      .footer :global(.footer__seal) {
+        width: 6rem;
+        height: auto;
+        margin-right: auto;
+      }
+
+      /* ---------- responsive ---------- */
+      @media (max-width: 63.99rem) {
+        .ingredient {
+          grid-column: span 6;
+        }
+        .facts {
+          grid-template-columns: 1fr 1fr;
+        }
+        .facts > :first-child {
+          grid-column: 1 / -1;
+        }
+        .share {
+          grid-template-columns: 1fr;
+          min-height: 0;
+        }
+        .share > :global(picture),
+        .share__copy {
+          grid-column: 1;
+        }
+        .share :global(.share__img) {
+          min-height: 0;
+          aspect-ratio: 3 / 2;
+        }
+        .share__copy {
+          padding: 3.5rem var(--margin) 4.5rem;
+        }
+        .ingredients h2,
+        .ingredients__intro {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (max-width: 47.99rem) {
+        .hide-narrow {
+          display: none;
+        }
+        .masthead__link {
+          display: none;
+        }
+        .hero {
+          display: flex;
+          flex-direction: column;
+          min-height: 0;
+        }
+        .hero .poster__media {
+          position: relative;
+          inset: auto;
+          z-index: 0;
+          order: 2;
+          height: max(22rem, calc(100svh - 27rem));
+        }
+        .hero .poster__media img {
+          object-position: 50% 100%;
+        }
+        .hero__copy {
+          align-self: start;
+          margin: 0;
+          padding: 2rem var(--margin) 2rem;
+        }
+        .hero h1 {
+          font-size: clamp(2.625rem, 11.5vw, 3.25rem);
+        }
+        .hero__lead {
+          margin-top: 1rem;
+          font-size: 1.0625rem;
+        }
+        .hero__actions {
+          margin-top: 1.5rem;
+          gap: 0.75rem 1.25rem;
+        }
+        .open.is-live {
+          height: 220svh;
+        }
+        .open__stage {
+          grid-template-rows: auto auto;
+          align-content: center;
+        }
+        .open__frame {
+          width: 100%;
+        }
+        .ingredient-row {
+          gap: 2rem 1rem;
+        }
+        .ingredient:nth-child(-n + 2) {
+          grid-column: 1 / -1;
+        }
+
+        .ingredient h3 {
+          font-size: 1.3125rem;
+          margin-top: 0.9rem;
+        }
+        .facts {
+          grid-template-columns: 1fr;
+        }
+        .facts__block--allergen {
+          margin: 0;
+        }
+        .close :global(img.poster__media) {
+          object-position: 82% 50%;
+        }
+        .close::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background: linear-gradient(to bottom, rgb(42 25 20 / 0.82) 0%, rgb(42 25 20 / 0.6) 55%, rgb(42 25 20 / 0.2) 100%);
+        }
+        .close__copy {
+          align-self: start;
+        }
+      }
+    </style>
+  </body>
+</html>

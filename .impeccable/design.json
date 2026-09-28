@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-28T07:30:24.042501+00:00",
+  "title": "Design System: Palm and Pod",
+  "source": {
+    "normative": "Design.md (owner-authored, not modified by this pass)",
+    "derivedFrom": [
+      "landing_page/src/styles/global.css",
+      "landing_page/src/pages/index.astro"
+    ],
+    "note": "Palette, type and component rules are Design.md's. The three supporting tones (Oat Paper, Cocoa Night, Toffee Ink) were introduced by the landing page and accepted by the owner on 2026-09-28; see Design.md 4.1.1. Entries still marked DERIVED IN BUILD are build values not yet in Design.md."
+  },
+  "extensions": {
+    "colorMeta": {
+      "cocoa": {
+        "role": "primary",
+        "displayName": "Cocoa Hearth",
+        "hex": "#3a241e",
+        "canonical": "oklch(28.6% 0.036 35.9)",
+        "tonalRamp": [
+          "#130805",
+          "#31211c",
+          "#513d37",
+          "#735b54",
+          "#957c75",
+          "#b79f98",
+          "#dac4bd",
+          "#fdeae4"
+        ],
+        "usage": "Design.md primary dark. Headings, body text, primary button slab, masthead link, dark fields. CSS --cocoa."
+      },
+      "oat": {
+        "role": "neutral",
+        "displayName": "Oat Milk",
+        "hex": "#f3e7d4",
+        "canonical": "oklch(93.2% 0.028 79.5)",
+        "tonalRamp": [
+          "#0f0a04",
+          "#2b2419",
+          "#494134",
+          "#6a6050",
+          "#8b8171",
+          "#ada495",
+          "#d1c8ba",
+          "#f5ede1"
+        ],
+        "usage": "Design.md primary light. In the build: text and button fill on dark posters (--oat). Not used as the page ground; see oat-photo."
+      },
+      "toffee": {
+        "role": "secondary",
+        "displayName": "Date Toffee",
+        "hex": "#a46745",
+        "canonical": "oklch(57.3% 0.092 49.3)",
+        "tonalRamp": [
+          "#1d0200",
+          "#3e1901",
+          "#623418",
+          "#895131",
+          "#ad7252",
+          "#ce9779",
+          "#efbda2",
+          "#ffe4cc"
+        ],
+        "usage": "Design.md primary warmth. In the build only as a 12% wash on the sharing poster (--toffee-wash); never as text (3.65:1 on the page ground)."
+      },
+      "leaf": {
+        "role": "tertiary",
+        "displayName": "Pistachio Leaf",
+        "hex": "#87937a",
+        "canonical": "oklch(64.6% 0.039 128.4)",
+        "tonalRamp": [
+          "#080d03",
+          "#212819",
+          "#3d4633",
+          "#5b664f",
+          "#7c8770",
+          "#9fa994",
+          "#c3cdb9",
+          "#e9f2e1"
+        ],
+        "usage": "Design.md botanical accent. In the build only as a 20% wash behind the allergen panel (--leaf-wash)."
+      },
+      "gold": {
+        "role": "accent",
+        "displayName": "Butter Gold",
+        "hex": "#d7b166",
+        "canonical": "oklch(77.8% 0.104 83.1)",
+        "tonalRamp": [
+          "#180600",
+          "#372000",
+          "#583c00",
+          "#7c5b08",
+          "#9f7d35",
+          "#c0a063",
+          "#e2c58f",
+          "#ffebbc"
+        ],
+        "usage": "Design.md joy accent, held to a glint: focus-ring outline, link underline on hover, text selection at 45%."
+      },
+      "oat-photo": {
+        "role": "neutral",
+        "displayName": "Oat Paper (photo-sampled)",
+        "hex": "#f3e4cf",
+        "canonical": "oklch(92.5% 0.032 76.4)",
+        "tonalRamp": [
+          "#100a03",
+          "#2c2418",
+          "#4a4032",
+          "#6b5f4e",
+          "#8d806e",
+          "#afa392",
+          "#d2c7b8",
+          "#f7ede0"
+        ],
+        "usage": "Accepted by the owner 2026-09-28 (Design.md 4.1.1). Oat Milk re-sampled from the photography's paper so photo edges vanish; the page ground, masthead bar and pinned-scene ground. 11.58:1 under Cocoa Hearth."
+      },
+      "cocoa-deep": {
+        "role": "primary",
+        "displayName": "Cocoa Hearth Deep",
+        "hex": "#2a1914",
+        "canonical": "oklch(23.4% 0.029 37.1)",
+        "tonalRamp": [
+          "#120806",
+          "#2f211e",
+          "#4e3e39",
+          "#705c56",
+          "#927d77",
+          "#b4a09a",
+          "#d7c5bf",
+          "#fbebe6"
+        ],
+        "usage": "Accepted by the owner 2026-09-28 (Design.md 4.1.1). Darker Cocoa Hearth: primary button hover, closing poster and footer field, photo scrims (rgb 42 25 20), selection text. 13.78:1 under Oat Milk."
+      },
+      "toffee-ink": {
+        "role": "secondary",
+        "displayName": "Date Toffee Ink",
+        "hex": "#8a5236",
+        "canonical": "oklch(49.7% 0.086 46.7)",
+        "tonalRamp": [
+          "#1c0300",
+          "#3d1906",
+          "#61351e",
+          "#875238",
+          "#ab7358",
+          "#cc977e",
+          "#edbda6",
+          "#ffe4d0"
+        ],
+        "usage": "Accepted by the owner 2026-09-28 (Design.md 4.1.1). Darkened Date Toffee for readable text: the pinned-scene subline. 5.03:1 on oat-photo, where Date Toffee itself is 3.65:1."
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Cocoa Rule",
+        "canonical": "rgb(58 36 30 / 0.14)",
+        "usage": "Cocoa Hearth at 14% for fine rules (facts divider). Within Design.md's 8-16% tint rule."
+      },
+      "leaf-wash": {
+        "role": "tertiary",
+        "displayName": "Pistachio Wash",
+        "canonical": "rgb(135 147 122 / 0.2)",
+        "usage": "Pistachio Leaf at 20%, calm panel behind the allergen statement. Within Design.md's 12-24%."
+      },
+      "toffee-wash": {
+        "role": "secondary",
+        "displayName": "Toffee Wash",
+        "canonical": "rgb(164 103 69 / 0.12)",
+        "usage": "Date Toffee at 12%, warm ground of the sharing poster. Within Design.md's 10-20%."
+      }
+    },
+    "typographyMeta": {
+      "display-xl": {
+        "displayName": "Display XL (poster)",
+        "fontFamily": "\"Fraunces Variable\", \"Iowan Old Style\", \"Palatino Linotype\", Georgia, serif",
+        "fontWeight": 600,
+        "fontSize": "clamp(2.875rem, 6.2vw, 6rem)",
+        "lineHeight": "0.96-0.98",
+        "letterSpacing": "-0.03em",
+        "fontVariation": "\"SOFT\" 60, \"WONK\" 0",
+        "purpose": "Hero and closing poster headlines. Build runs to 96px desktop; Design.md Display XL is 72px (drift)."
+      },
+      "display-l": {
+        "displayName": "Display L",
+        "fontFamily": "\"Fraunces Variable\", \"Iowan Old Style\", \"Palatino Linotype\", Georgia, serif",
+        "fontWeight": 600,
+        "fontSize": "clamp(2.25rem, 5.4vw, 5rem)",
+        "letterSpacing": "-0.022em to -0.025em",
+        "fontVariation": "\"SOFT\" 60, \"WONK\" 0",
+        "purpose": "Texture and pinned-scene poster headlines (64-80px desktop)."
+      },
+      "heading-1": {
+        "displayName": "Heading 1",
+        "fontFamily": "\"Fraunces Variable\", \"Iowan Old Style\", \"Palatino Linotype\", Georgia, serif",
+        "fontWeight": 600,
+        "fontSize": "clamp(2.125rem, 3.8vw, 3.75rem)",
+        "letterSpacing": "-0.018em to -0.02em",
+        "fontVariation": "\"SOFT\" 60, \"WONK\" 0",
+        "purpose": "Section headings on calm information and the sharing split."
+      },
+      "heading-3": {
+        "displayName": "Heading 3",
+        "fontFamily": "\"Fraunces Variable\", \"Iowan Old Style\", \"Palatino Linotype\", Georgia, serif",
+        "fontWeight": 600,
+        "fontSize": "1.5rem",
+        "lineHeight": 1.15,
+        "fontVariation": "\"SOFT\" 60, \"WONK\" 0",
+        "purpose": "Ingredient names under their photographs."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "fontFamily": "\"Manrope Variable\", \"Avenir Next\", Avenir, Helvetica, Arial, sans-serif",
+        "fontWeight": 400,
+        "fontSize": "clamp(1.0625rem, 1.5vw, 1.3125rem)",
+        "purpose": "The one supporting sentence under a poster headline."
+      },
+      "body": {
+        "displayName": "Body",
+        "fontFamily": "\"Manrope Variable\", \"Avenir Next\", Avenir, Helvetica, Arial, sans-serif",
+        "fontWeight": 400,
+        "fontSize": "1.0625rem",
+        "lineHeight": 1.62,
+        "purpose": "Default text, 17px, matching Design.md Body."
+      },
+      "small": {
+        "displayName": "Small",
+        "fontFamily": "\"Manrope Variable\", \"Avenir Next\", Avenir, Helvetica, Arial, sans-serif",
+        "fontWeight": 400,
+        "fontSize": "0.9375rem-0.9688rem",
+        "lineHeight": 1.55,
+        "purpose": "Ingredient roles, masthead link, closing number line."
+      },
+      "label": {
+        "displayName": "Label",
+        "fontFamily": "\"Manrope Variable\", \"Avenir Next\", Avenir, Helvetica, Arial, sans-serif",
+        "fontWeight": 600,
+        "fontSize": "0.8125rem",
+        "letterSpacing": "0.08em",
+        "textTransform": "uppercase",
+        "purpose": "Headings of factual blocks (ingredient list, allergens). Build uses 13px; Design.md Label is 12px."
+      },
+      "wordmark": {
+        "displayName": "Provisional wordmark",
+        "fontFamily": "\"Fraunces Variable\", \"Iowan Old Style\", \"Palatino Linotype\", Georgia, serif",
+        "fontWeight": 600,
+        "fontSize": "1.25rem-1.375rem",
+        "letterSpacing": "-0.01em",
+        "fontVariation": "\"SOFT\" 100, \"WONK\" 1",
+        "purpose": "Typed 'Palm and Pod' in masthead and footer. Provisional per Design.md section 6; not a logo."
+      }
+    },
+    "shadows": [
+      {
+        "name": "button-rest",
+        "value": "0 1px 0 rgb(255 255 255 / 0.08) inset, 0 10px 24px -14px rgb(42 25 20 / 0.7)",
+        "purpose": "Soft ambient lift under the cocoa button slab."
+      },
+      {
+        "name": "button-hover",
+        "value": "0 1px 0 rgb(255 255 255 / 0.08) inset, 0 14px 28px -14px rgb(42 25 20 / 0.8)",
+        "purpose": "Hover: slightly deeper ambient shadow with the Cocoa Hearth Deep fill."
+      },
+      {
+        "name": "button-active",
+        "value": "0 4px 10px -8px rgb(42 25 20 / 0.8)",
+        "purpose": "Pressed: shadow collapses."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 3px solid #d7b166; outline-offset: 3px; box-shadow: 0 0 0 6px #3a241e",
+        "purpose": "Butter Gold ring backed by a Cocoa Hearth halo, so gold is never the only focus indicator (Design.md 12.1). On dark fields the halo is Cocoa Hearth Deep."
+      },
+      {
+        "name": "photo-scrim",
+        "value": "linear-gradient(to top, rgb(42 25 20 / 0.9) 0%, rgb(42 25 20 / 0.55) 38%, rgb(42 25 20 / 0) 70%)",
+        "purpose": "DERIVED IN BUILD. Cocoa-deep scrim under Oat Milk text on dark photo posters; mobile variant runs top-down (0.82 to 0.2)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Single easing for all transitions."
+      },
+      {
+        "name": "state-change",
+        "value": "200-220ms",
+        "purpose": "Button and link state transitions; inside Design.md's 180-350ms."
+      },
+      {
+        "name": "rise",
+        "value": "opacity + translateY(16px), 360ms, 90ms stagger",
+        "purpose": "Poster headline entrance. 10ms over Design.md's 350ms ceiling."
+      },
+      {
+        "name": "push-in",
+        "value": "scale(1.06) to scale(1), 1800ms",
+        "purpose": "Slow settle of each poster photograph on arrival. Longer than Design.md's 180-350ms transition band; a deliberate ambient move."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all durations 0.01ms; pinned scene shows the open state statically",
+        "purpose": "Design.md 12.5."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "max-width: 47.99rem"
+      },
+      {
+        "name": "tablet",
+        "value": "max-width: 63.99rem"
+      }
+    ],
+    "layout": {
+      "pageMargin": "clamp(1.25rem, 5vw, 5rem)",
+      "maxContent": "80rem (1280px)",
+      "sectionPadding": "clamp(5rem, 12vh, 9rem) desktop information section"
+    },
+    "radii": [
+      {
+        "name": "button",
+        "value": "14px"
+      },
+      {
+        "name": "button-small",
+        "value": "12px"
+      },
+      {
+        "name": "image-card",
+        "value": "18px"
+      },
+      {
+        "name": "panel",
+        "value": "18px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Cocoa Hearth slab with Oat Milk text; the single order action.",
+      "html": "<a class=\"ds-btn\" href=\"#\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" class=\"ds-icon\"><path d=\"M7.9 20A9 9 0 1 0 4 16.1L2 22Z\"/></svg>Order on WhatsApp</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:.6rem;min-height:3.5rem;padding:0 1.6rem;border-radius:14px;background:#3a241e;color:#f3e7d4;font-family:\"Manrope Variable\",\"Avenir Next\",Avenir,Helvetica,Arial,sans-serif;font-weight:600;font-size:1.0625rem;letter-spacing:.005em;text-decoration:none;box-shadow:0 1px 0 rgb(255 255 255 / .08) inset,0 10px 24px -14px rgb(42 25 20 / .7);transition:background-color 220ms cubic-bezier(.16,1,.3,1),transform 220ms cubic-bezier(.16,1,.3,1),box-shadow 220ms cubic-bezier(.16,1,.3,1)}.ds-btn:hover{background:#2a1914;transform:translateY(-1px);box-shadow:0 1px 0 rgb(255 255 255 / .08) inset,0 14px 28px -14px rgb(42 25 20 / .8)}.ds-btn:active{transform:translateY(0);box-shadow:0 4px 10px -8px rgb(42 25 20 / .8)}.ds-btn:focus-visible{outline:3px solid #d7b166;outline-offset:3px;box-shadow:0 0 0 6px #3a241e}.ds-icon{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}"
+    },
+    {
+      "name": "Light Button",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "Oat Milk slab with Cocoa Hearth text, used on dark posters.",
+      "html": "<a class=\"ds-btn-light\" href=\"#\">Order on WhatsApp</a>",
+      "css": ".ds-btn-light{display:inline-flex;align-items:center;min-height:3.5rem;padding:0 1.6rem;border-radius:14px;background:#f3e7d4;color:#3a241e;font-family:\"Manrope Variable\",Avenir,Helvetica,Arial,sans-serif;font-weight:600;font-size:1.0625rem;text-decoration:none;transition:background-color 220ms cubic-bezier(.16,1,.3,1)}.ds-btn-light:hover{background:#fff8ee}.ds-btn-light:focus-visible{outline:3px solid #d7b166;outline-offset:3px;box-shadow:0 0 0 6px #2a1914}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "refersTo": "link-text",
+      "description": "Secondary action as an underlined Manrope link; underline warms to Butter Gold on hover.",
+      "html": "<a class=\"ds-textlink\" href=\"#\">See the ingredients</a>",
+      "css": ".ds-textlink{color:#3a241e;font-family:\"Manrope Variable\",Avenir,Helvetica,Arial,sans-serif;font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em;text-decoration-color:rgb(58 36 30 / .35);transition:text-decoration-color 200ms cubic-bezier(.16,1,.3,1)}.ds-textlink:hover{text-decoration-color:#d7b166}.ds-textlink:focus-visible{outline:3px solid #d7b166;outline-offset:3px;box-shadow:0 0 0 6px #3a241e;border-radius:6px}"
+    },
+    {
+      "name": "Masthead",
+      "kind": "nav",
+      "refersTo": "nav-masthead",
+      "description": "Solid oat bar: typed wordmark left, one link and a small order button right.",
+      "html": "<header class=\"ds-mast\"><a class=\"ds-mark\" href=\"#\">Palm and Pod</a><nav class=\"ds-mast-nav\"><a href=\"#\">Ingredients</a><a class=\"ds-btn-sm\" href=\"#\">Order on WhatsApp</a></nav></header>",
+      "css": ".ds-mast{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem 2rem 1rem;background:#f3e4cf;color:#3a241e}.ds-mark{font-family:\"Fraunces Variable\",Georgia,serif;font-weight:600;font-variation-settings:\"SOFT\" 100,\"WONK\" 1;font-size:1.375rem;letter-spacing:-.01em;text-decoration:none;color:inherit}.ds-mast-nav{display:flex;align-items:center;gap:1.5rem;font-family:\"Manrope Variable\",Avenir,Helvetica,Arial,sans-serif;font-size:.9375rem;font-weight:600}.ds-mast-nav a{color:inherit;text-underline-offset:.22em}.ds-mast-nav a:hover{text-decoration-color:#d7b166}.ds-btn-sm{display:inline-flex;align-items:center;min-height:2.75rem;padding:0 1rem;border-radius:12px;background:#3a241e;color:#f3e7d4!important;text-decoration:none}.ds-btn-sm:hover{background:#2a1914}.ds-mast a:focus-visible{outline:3px solid #d7b166;outline-offset:3px;box-shadow:0 0 0 6px #3a241e;border-radius:6px}"
+    },
+    {
+      "name": "Ingredient Card",
+      "kind": "card",
+      "refersTo": "card-ingredient",
+      "description": "Unframed: a 4:5 photograph at 18px radius, a Fraunces name, one Manrope line of role.",
+      "html": "<div class=\"ds-ing\"><div class=\"ds-ing-img\"></div><h3>Dates</h3><p>For sweetness. Soft and sticky.</p></div>",
+      "css": ".ds-ing{max-width:14rem;color:#3a241e}.ds-ing-img{aspect-ratio:4/5;border-radius:18px;background:#a46745}.ds-ing h3{margin:1.25rem 0 0;font-family:\"Fraunces Variable\",Georgia,serif;font-weight:600;font-variation-settings:\"SOFT\" 60,\"WONK\" 0;font-size:1.5rem;line-height:1.15}.ds-ing p{margin:.4rem 0 0;font-family:\"Manrope Variable\",Avenir,sans-serif;font-size:.9688rem;line-height:1.55;max-width:22ch}"
+    },
+    {
+      "name": "Allergen Panel",
+      "kind": "card",
+      "refersTo": "panel-allergen",
+      "description": "Pistachio wash panel, uppercase Manrope label with a line icon, plain statement in bold.",
+      "html": "<div class=\"ds-allergen\" role=\"note\"><h3><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" class=\"ds-ic\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7.5v5.5M12 16.4v.1\"/></svg>Allergens</h3><p><strong>Contains tree nuts</strong> and <strong>milk</strong>.</p></div>",
+      "css": ".ds-allergen{padding:1.5rem;border-radius:18px;background:rgb(135 147 122 / .2);color:#3a241e;max-width:22rem}.ds-allergen h3{display:flex;align-items:center;gap:.5rem;margin:0;font-family:\"Manrope Variable\",Avenir,sans-serif;font-weight:600;font-size:.8125rem;letter-spacing:.08em;text-transform:uppercase}.ds-ic{width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}.ds-allergen p{margin:.75rem 0 0;font-family:\"Manrope Variable\",Avenir,sans-serif;font-size:1.125rem}"
+    },
+    {
+      "name": "Dark Photo Poster",
+      "kind": "custom",
+      "refersTo": "poster-dark",
+      "description": "Signature: full-bleed photograph, cocoa-deep scrim, one Fraunces line and one Manrope sentence in Oat Milk.",
+      "html": "<section class=\"ds-poster\"><div class=\"ds-poster-copy\"><h2>Keep the joy.</h2><p>We are taking orders on WhatsApp.</p></div></section>",
+      "css": ".ds-poster{position:relative;min-height:22rem;display:grid;align-items:end;background:#5a3a2c;color:#f3e7d4;overflow:hidden}.ds-poster::before{content:\"\";position:absolute;inset:0;background:linear-gradient(to top,rgb(42 25 20 / .9) 0%,rgb(42 25 20 / .55) 38%,rgb(42 25 20 / 0) 70%)}.ds-poster-copy{position:relative;padding:2rem}.ds-poster h2{margin:0;font-family:\"Fraunces Variable\",Georgia,serif;font-weight:600;font-variation-settings:\"SOFT\" 60,\"WONK\" 0;font-size:3rem;line-height:.98;letter-spacing:-.03em}.ds-poster p{margin:1rem 0 0;font-family:\"Manrope Variable\",Avenir,sans-serif;font-size:1.125rem;color:rgb(243 231 212 / .9);max-width:28rem}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Nurturing indulgence",
+    "overview": "Palm and Pod should look like something deeply pleasurable made by someone who cares what goes into it. Every visual should balance three signals: Indulgence, Care, Ingredient honesty. The order matters. Lead with desire, support it with care, and close with proof.",
+    "keyCharacteristics": [
+      "Appetite before explanation",
+      "Warmth without sentimentality",
+      "Natural, not rustic",
+      "Restraint creates trust",
+      "Quiet distinction"
+    ],
+    "rules": [
+      {
+        "name": "Recommended balance",
+        "body": "50–65% Oat Milk or warm photography; 20–30% Cocoa Hearth; 10–15% Date Toffee or Pistachio Leaf; no more than 5% Butter Gold.",
+        "section": "colors"
+      },
+      {
+        "name": "Butter Gold as glint",
+        "body": "Butter Gold should behave like a glint of warmth, not a background color.",
+        "section": "colors"
+      },
+      {
+        "name": "Fraunces and Manrope roles",
+        "body": "Fraunces for brand expression and headings; Manrope for body, facts, labels, navigation and buttons.",
+        "section": "typography"
+      },
+      {
+        "name": "Low-opacity borders over shadow",
+        "body": "Prefer a subtle Cocoa Hearth border at low opacity over a heavy shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Cocoa Hearth text on Oat Milk",
+      "Oat Milk text on Cocoa Hearth",
+      "Cocoa Hearth text on Butter Gold",
+      "Use Butter Gold for a focus ring or small active detail, not as the only focus indicator.",
+      "Respect reduced-motion preferences."
+    ],
+    "donts": [
+      "Pure black as a replacement for Cocoa Hearth",
+      "Butter Gold text on Oat Milk",
+      "High-saturation green, orange, pink, purple, or primary colors",
+      "Do not bounce, wobble, pulse, or use candy-like elastic motion.",
+      "Do not set emotional headlines in all caps."
+    ]
+  }
+}

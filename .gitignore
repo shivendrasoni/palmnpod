@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output and Astro cache
+dist/
+.astro/
+
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+*.log
+
+# OS and editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Local Claude Code settings
+.claude/settings.local.json
+
+# Impeccable working files (regenerable: previews, screenshots, decision-page logs)
+.impeccable/tmp/
+.impeccable/review/
+.impeccable/questions/
+.impeccable/config.local.json
+
+# Brand video, not committed for now
+brand/*.mp4
