@@ -7,4 +7,15 @@ export default defineConfig({
   image: {
     responsiveStyles: false,
   },
+  server: {
+    allowedHosts: ['.ngrok-free.app', '.ngrok.app', '.ngrok.io'],
+  },
+  vite: {
+    server: {
+      allowedHosts: ['.ngrok-free.app', '.ngrok.app', '.ngrok.io'],
+    },
+    preview: {
+      allowedHosts: ['.ngrok-free.app', '.ngrok.app', '.ngrok.io'],
+    },
+  },
 });

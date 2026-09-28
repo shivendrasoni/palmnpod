@@ -30,3 +30,6 @@ npm-debug.log*
 
 # Brand video, not committed for now
 brand/*.mp4
+
+# Scroll video encodes, placeholder until regenerated
+landing_page/public/video/*.mp4
