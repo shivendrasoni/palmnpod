@@ -116,10 +116,10 @@ const fullList = [
         <a class="masthead__link" href="/products/fudge-brownie/">Fudge brownie</a>
         <a class="masthead__link" href="/products/peanut-butter-brownie/">Peanut butter fudge</a>
         <a class="masthead__link" href="#ingredients">Ingredients</a>
-        <a class="button button--small" href={orderUrl} target="_blank" rel="noopener">
+        <button class="button button--small" type="button" data-open-order>
           <svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
           <span>Order<span class="hide-narrow"> on WhatsApp</span></span>
-        </a>
+        </button>
       </nav>
     </header>
 
@@ -147,10 +147,10 @@ const fullList = [
             The Palm and Pod fudge brownie. Soft and fudgy, made with dates, seeds, nuts, butter, pure cocoa and whey protein. No refined sugar.
           </p>
           <div class="hero__actions rise">
-            <a class="button" href={orderUrl} target="_blank" rel="noopener">
+            <button class="button" type="button" data-open-order>
               <svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
               Order on WhatsApp
-            </a>
+            </button>
             <a class="textlink" href="#ingredients">See the ingredients</a>
           </div>
         </div>
@@ -317,15 +317,42 @@ const fullList = [
           <h2 id="close-title" class="rise">Keep the joy.</h2>
           <p class="rise">We are taking orders on WhatsApp. Send us a message and we will take it from there. No forms, no sign-ups, just a conversation.</p>
           <div class="close__actions rise">
-            <a class="button button--light" href={orderUrl} target="_blank" rel="noopener">
+            <button class="button button--light" type="button" data-open-order>
               <svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
               Order on WhatsApp
-            </a>
+            </button>
             <p class="close__number">or message <a href={orderUrl} target="_blank" rel="noopener">{WHATSAPP_DISPLAY}</a></p>
           </div>
         </div>
       </section>
+
     </main>
+    <dialog class="order-modal" data-order-modal aria-labelledby="order-title">
+      <div class="order-modal__head"><div><p class="product-details__eyebrow">Order on WhatsApp</p><h2 id="order-title">A few details, then we’ll take it from there.</h2></div><button class="order-modal__close" type="button" data-close-order aria-label="Close order form">×</button></div>
+      <form class="order__form" data-order-form data-product="fudge brownie" data-whatsapp-number={WHATSAPP_NUMBER}>
+          <label>
+            Your name
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label>
+            Mobile number
+            <input name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+          </label>
+          <label>
+            Product
+            <input value="fudge brownie" readonly aria-readonly="true" />
+          </label>
+          <label>
+            Quantity
+            <select name="quantity" required>
+              <option value="Box of 4">Box of 4</option>
+              <option value="Box of 6">Box of 6</option>
+              <option value="Box of 12">Box of 12</option>
+            </select>
+          </label>
+          <button class="button order__submit" type="submit">Get my Fudge Now</button>
+      </form>
+    </dialog>
 
     <footer class="footer">
       <Image class="footer__seal" src={logoSeal} widths={[120, 240]} sizes="96px" format="webp" alt="Palm and Pod" loading="lazy" />
@@ -341,6 +368,29 @@ const fullList = [
       gsap.registerPlugin(ScrollTrigger);
 
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const modal = document.querySelector<HTMLDialogElement>('[data-order-modal]');
+      document.querySelectorAll<HTMLButtonElement>('[data-open-order]').forEach((button) => button.addEventListener('click', () => modal?.showModal()));
+      document.querySelector<HTMLButtonElement>('[data-close-order]')?.addEventListener('click', () => modal?.close());
+
+      document.querySelectorAll<HTMLFormElement>('[data-order-form]').forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          if (!form.reportValidity()) return;
+
+          const values = new FormData(form);
+          const product = form.dataset.product ?? '';
+          const number = form.dataset.whatsappNumber ?? '';
+          const message = [
+            'Hi, I would like to place an order.',
+            `Name: ${values.get('name')}`,
+            `Phone: ${values.get('phone')}`,
+            `Product: ${product}`,
+            `Quantity: ${values.get('quantity')}`,
+          ].join('\n');
+          modal?.close();
+          window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+        });
+      });
 
       // Entrance: posters settle in once as they arrive. Content stays visible without JS.
       document.documentElement.classList.add('js');

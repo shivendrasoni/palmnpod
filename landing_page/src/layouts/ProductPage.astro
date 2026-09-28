@@ -79,7 +79,7 @@ const productSchema = {
           {eyebrow && <p class="product-hero__eyebrow">{eyebrow}</p>}
           <h1 id="product-title">{title}</h1>
           <p>{description}</p>
-          <a class="button" href={orderUrl} target="_blank" rel="noopener">Order on WhatsApp</a>
+          <button class="button" type="button" data-open-order>Order on WhatsApp</button>
         </div>
       </section>
 
@@ -99,14 +99,64 @@ const productSchema = {
 
       <section class="product-close">
         <p>Something good for the table, an afternoon break, or a quiet moment to yourself.</p>
-        <a class="button button--light" href={orderUrl} target="_blank" rel="noopener">Order on WhatsApp</a>
+        <button class="button button--light" type="button" data-open-order>Order on WhatsApp</button>
       </section>
     </main>
+    <dialog class="order-modal" data-order-modal aria-labelledby="order-title">
+      <div class="order-modal__head"><div><p class="product-details__eyebrow">Order on WhatsApp</p><h2 id="order-title">A few details, then we’ll take it from there.</h2></div><button class="order-modal__close" type="button" data-close-order aria-label="Close order form">×</button></div>
+      <form class="order__form" data-order-form data-product={name} data-whatsapp-number={WHATSAPP_NUMBER}>
+          <label>
+            Your name
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label>
+            Mobile number
+            <input name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+          </label>
+          <label>
+            Product
+            <input value={name} readonly aria-readonly="true" />
+          </label>
+          <label>
+            Quantity
+            <select name="quantity" required>
+              <option value="Box of 4">Box of 4</option>
+              <option value="Box of 6">Box of 6</option>
+              <option value="Box of 12">Box of 12</option>
+            </select>
+          </label>
+          <button class="button order__submit" type="submit">Get my Fudge Now</button>
+      </form>
+    </dialog>
 
     <footer class="footer">
       <Image class="footer__seal" src={logoSeal} widths={[120, 240]} sizes="96px" format="webp" alt="Palm and Pod" loading="lazy" />
       <p>Product images are for illustration.</p>
       <p>&copy; {new Date().getFullYear()} Palm and Pod</p>
     </footer>
+    <script>
+      const modal = document.querySelector<HTMLDialogElement>('[data-order-modal]');
+      document.querySelectorAll<HTMLButtonElement>('[data-open-order]').forEach((button) => button.addEventListener('click', () => modal?.showModal()));
+      document.querySelector<HTMLButtonElement>('[data-close-order]')?.addEventListener('click', () => modal?.close());
+      document.querySelectorAll<HTMLFormElement>('[data-order-form]').forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          if (!form.reportValidity()) return;
+
+          const values = new FormData(form);
+          const product = form.dataset.product ?? '';
+          const number = form.dataset.whatsappNumber ?? '';
+          const message = [
+            'Hi, I would like to place an order.',
+            `Name: ${values.get('name')}`,
+            `Phone: ${values.get('phone')}`,
+            `Product: ${product}`,
+            `Quantity: ${values.get('quantity')}`,
+          ].join('\n');
+          modal?.close();
+          window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+        });
+      });
+    </script>
   </body>
 </html>
