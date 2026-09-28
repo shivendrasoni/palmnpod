@@ -23,10 +23,39 @@ const WHATSAPP_DISPLAY = '+91 97304 71041';
 const WHATSAPP_TEXT = 'Hi, I want to place an order';
 const orderUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_TEXT)}`;
 
-const title = 'Palm and Pod: chocolate joy, made with care';
+const title = 'Palm and Pod: a fudge brownie, made with care';
 const description =
   'A soft, fudgy brownie made with dates, seeds, nuts, butter, pure cocoa and whey protein. No refined sugar. Order on WhatsApp.';
 const ogImage = Astro.site ? new URL('/og-share.jpg', Astro.site).href : '/og-share.jpg';
+const canonicalUrl = Astro.site ? new URL('/', Astro.site).href : 'https://www.palmandpod.com/';
+const logoUrl = Astro.site ? new URL('/apple-touch-icon.png', Astro.site).href : 'https://www.palmandpod.com/apple-touch-icon.png';
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Palm and Pod',
+  url: canonicalUrl,
+  logo: logoUrl,
+  description,
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+91-97304-71041',
+    contactType: 'sales',
+    areaServed: 'IN',
+    availableLanguage: ['en', 'hi'],
+  },
+};
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Palm and Pod Fudge Brownie',
+  description:
+    'A soft, fudgy brownie made with dates, flax seeds, sunflower seeds, chia seeds, pumpkin seeds, walnuts, cashews, almonds, butter, pure cocoa and whey protein. No refined sugar.',
+  image: [ogImage],
+  brand: { '@type': 'Brand', name: 'Palm and Pod' },
+  category: 'Food > Bakery > Brownies',
+};
 
 // Hero is art-directed: a landscape frame for wide screens, a portrait one for phones.
 const heroWide = await getImage({ src: heroDesktop, widths: [1280, 1920, 2880], format: 'webp', quality: 78 });
@@ -58,15 +87,23 @@ const fullList = [
     <meta name="theme-color" content="#3a241e" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Palm and Pod" />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Palm and Pod" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="preload" as="image" type="image/avif" imagesrcset={heroTallAvif.srcSet.attribute} media="(max-width: 47.99rem)" />
     <link rel="preload" as="image" type="image/avif" imagesrcset={heroWideAvif.srcSet.attribute} media="(min-width: 48rem)" />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -103,7 +140,7 @@ const fullList = [
           />
         </picture>
         <div class="hero__copy">
-          <h1 id="hero-title" class="rise">Chocolate joy, made with care.</h1>
+          <h1 id="hero-title" class="rise">A fudge brownie, made with care.</h1>
           <p class="hero__lead rise">
             The Palm and Pod fudge brownie. Soft and fudgy, made with dates, seeds, nuts, butter, pure cocoa and whey protein. No refined sugar.
           </p>
@@ -132,7 +169,7 @@ const fullList = [
         />
         <div class="texture__copy">
           <h2 id="texture-title" class="rise">Deep cocoa. Soft centre. A little crunch.</h2>
-          <p class="rise">A brownie that feels like a brownie. Dense and fudgy, with nuts and seeds in every bite.</p>
+          <p class="rise">A brownie that feels like a brownie. Dense and fudgy, with nuts and seeds in every bite. Break it open and the same soft centre is there every time.</p>
         </div>
       </section>
 
@@ -171,7 +208,7 @@ const fullList = [
         <div class="ingredients__head">
           <h2 id="ingredients-title">What goes in matters.</h2>
           <p class="ingredients__intro">
-            Dates for sweetness, pure cocoa for deep chocolate flavour, butter for richness, seeds and nuts for texture, and whey protein as part of the recipe.
+            Dates for sweetness, pure cocoa for deep chocolate flavour, butter for richness, seeds and nuts for texture, and whey protein as part of the recipe. Eleven ingredients in total, chosen for a reason and named in full below.
           </p>
         </div>
 
@@ -205,16 +242,41 @@ const fullList = [
               <svg aria-hidden="true" viewBox="0 0 24 24" class="icon icon--line"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5M12 16.4v.1" /></svg>
               Allergens
             </h3>
-            <p><strong>Contains tree nuts</strong> (walnut, cashew, almond) <strong>and milk</strong> (butter, whey).</p>
+            <p><strong>Contains tree nuts</strong> (walnut, cashew, almond) <strong>and milk</strong> (butter, whey). Worth checking before you share it with someone who needs to know.</p>
           </div>
           <div class="facts__block">
             <h3>Good to know</h3>
-            <ul class="facts__points" role="list">
-              <li>No refined sugar. The sweetness comes from dates.</li>
-              <li>Contains protein from its recipe.</li>
-            </ul>
+            <p class="facts__points">There is no refined sugar in this brownie. The sweetness comes from dates, and whey protein is built into the recipe, so every piece contains protein.</p>
           </div>
         </div>
+      </section>
+
+      <!-- 4b. Questions people ask -->
+      <section class="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">Questions people ask us</h2>
+        <p class="faq__intro">A few things people usually ask before they order.</p>
+        <dl class="faq__list">
+          <div class="faq__item">
+            <dt>What's in a Palm and Pod brownie?</dt>
+            <dd>Dates, flax seeds, sunflower seeds, chia seeds, pumpkin seeds, walnuts, cashews, almonds, butter, pure cocoa and whey protein. Eleven ingredients, each one there for a reason.</dd>
+          </div>
+          <div class="faq__item">
+            <dt>What does it taste like?</dt>
+            <dd>Deep cocoa flavour with a soft, fudgy centre, and a little crunch from the seeds and nuts folded through it.</dd>
+          </div>
+          <div class="faq__item">
+            <dt>Does it have refined sugar?</dt>
+            <dd>No. There is no refined sugar in the recipe. The sweetness comes from dates.</dd>
+          </div>
+          <div class="faq__item">
+            <dt>What are the allergens?</dt>
+            <dd>It contains tree nuts (walnut, cashew, almond) and milk (butter, whey).</dd>
+          </div>
+          <div class="faq__item">
+            <dt>How do I order?</dt>
+            <dd>We take orders on WhatsApp. Send us a message and we will take it from there.</dd>
+          </div>
+        </dl>
       </section>
 
       <!-- 5. Sharing poster -->
@@ -232,7 +294,7 @@ const fullList = [
         />
         <div class="share__copy">
           <h2 id="share-title" class="rise">For the people you care about. Including you.</h2>
-          <p class="rise">An afternoon break, something after dinner, a piece for the table. Chocolate that is easy to offer and easy to want.</p>
+          <p class="rise">An afternoon break, something after dinner, a piece for the table. Chocolate that is easy to offer and easy to want. Cut it, pass it around, and let the ingredients do the talking.</p>
         </div>
       </section>
 
@@ -251,7 +313,7 @@ const fullList = [
         />
         <div class="close__copy">
           <h2 id="close-title" class="rise">Keep the joy.</h2>
-          <p class="rise">We are taking orders on WhatsApp. Send us a message and we will take it from there.</p>
+          <p class="rise">We are taking orders on WhatsApp. Send us a message and we will take it from there. No forms, no sign-ups, just a conversation.</p>
           <div class="close__actions rise">
             <a class="button button--light" href={orderUrl} target="_blank" rel="noopener">
               <svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
@@ -735,6 +797,46 @@ const fullList = [
         font-size: 1.0625rem;
       }
 
+      /* ---------- 4b. faq ---------- */
+      .faq {
+        max-width: var(--max);
+        margin-inline: auto;
+        padding: 0 var(--margin) clamp(5rem, 12vh, 9rem);
+      }
+      .faq h2 {
+        font-size: clamp(2rem, 3.4vw, 3rem);
+        line-height: 1.08;
+        letter-spacing: -0.018em;
+        max-width: 20ch;
+      }
+      .faq__intro {
+        margin-top: 0.75rem;
+        max-width: 34rem;
+        font-size: 1.125rem;
+        color: var(--toffee-ink);
+      }
+      .faq__list {
+        margin: clamp(2.5rem, 6vh, 3.5rem) 0 0;
+        padding-top: 2.5rem;
+        border-top: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem clamp(1.5rem, 3vw, 3rem);
+      }
+      .faq__item dt {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .faq__item dd {
+        margin: 0.6rem 0 0;
+        font-size: 1.0625rem;
+        line-height: 1.55;
+        color: var(--toffee-ink);
+        max-width: 38ch;
+      }
+
       /* ---------- 5. share ---------- */
       .share {
         display: grid;
@@ -925,6 +1027,10 @@ const fullList = [
         }
         .facts__block--allergen {
           margin: 0;
+        }
+        .faq__list {
+          grid-template-columns: 1fr;
+          gap: 1.75rem;
         }
         .close :global(img.poster__media) {
           object-position: 82% 50%;
